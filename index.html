@@ -15,64 +15,124 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        body { background: #0f172a; color: #f8fafc; text-align: center; padding: 60px 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; }
+        body { 
+            background: #0f172a; 
+            color: #f8fafc; 
+            text-align: center; 
+            padding: 40px 15px; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            align-items: center; 
+            overflow-x: hidden; 
+        }
         
-        .header-box { margin-bottom: 40px; max-width: 600px; }
-        h1 { color: #f8fafc; font-size: clamp(26px, 4vw, 38px); font-weight: 900; margin-bottom: 15px; }
-        h1 span { color: #c5a059; }
-        p { color: #94a3b8; font-size: clamp(15px, 2vw, 17px); }
+        .main-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-        .links-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; width: 100%; max-width: 900px; margin: 0 auto; }
+        .header-box { margin-bottom: 35px; }
+        h1 { color: #f8fafc; font-size: clamp(24px, 4vw, 36px); font-weight: 900; margin-bottom: 12px; }
+        h1 span { color: #c5a059; }
+        p { color: #94a3b8; font-size: clamp(14px, 2vw, 16px); padding: 0 10px; }
+
+        .links-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 15px; 
+            width: 100%; 
+        }
         
-        .project-card { background: #1e293b; color: #fff; padding: 20px 25px; border-radius: 12px; text-decoration: none; font-size: 17px; font-weight: 600; transition: transform 0.2s ease, background 0.2s ease; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 20px rgba(0,0,0,0.2); will-change: transform; }
-        .project-card:hover { transform: translateY(-3px); background: #27354f; border-color: #c5a059; color: #c5a059; }
+        .project-card { 
+            background: #1e293b; 
+            color: #fff; 
+            padding: 18px 20px; 
+            border-radius: 12px; 
+            text-decoration: none; 
+            font-size: 16px; 
+            font-weight: 600; 
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+            will-change: transform; 
+        }
         
-        .project-info { display: flex; align-items: center; gap: 15px; }
-        .project-info i { font-size: 22px; color: #c5a059; width: 30px; text-align: center; }
-        .arrow-icon { color: #64748b; font-size: 14px; transition: transform 0.2s ease; }
+        .project-card:hover { 
+            transform: translateY(-3px); 
+            background: #27354f; 
+            border-color: #c5a059; 
+            color: #c5a059; 
+        }
+        
+        .project-info { display: flex; align-items: center; gap: 12px; }
+        .project-info i { font-size: 20px; color: #c5a059; width: 28px; text-align: center; }
+        .arrow-icon { color: #64748b; font-size: 13px; transition: transform 0.2s ease; }
         .project-card:hover .arrow-icon { color: #c5a059; transform: translateX(-4px); }
+
+        .footer-box {
+            margin-top: 40px; 
+            color: #64748b; 
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+            padding-top: 20px;
+        }
+
+        /* تحسينات إضافية لأجهزة الموبايل الصغيرة */
+        @media (max-width: 480px) {
+            body { padding: 30px 12px; }
+            .project-card { padding: 15px; font-size: 15px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="header-box">
-        <h1>معرض مشاريع <span>أويس</span> البرمجية</h1>
-        <p>استعرض أحدث التطبيقات وواجهات الويب التي قمت بتطويرها وتصميمها باحترافية:</p>
-    </div>
-    
-    <div class="links-container">
-        <a href="nexus-store.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-store"></i> متجر نيكس (Nexus Store)</div>
-            <i class="fa fa-chevron-left arrow-icon"></i>
-        </a>
+    <div class="main-wrapper">
+        <div class="header-box">
+            <h1>معرض مشاريع <span>أويس</span> البرمجية</h1>
+            <p>استعرض أحدث التطبيقات وواجهات الويب التي قمت بتطويرها وتصميمها باحترافية:</p>
+        </div>
         
-        <a href="restaurant.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-utensils"></i> المطعم (Restaurant)</div>
-            <i class="fa fa-chevron-left arrow-icon"></i>
-        </a>
-        
-        <a href="real-estate.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-building"></i> العقارات (Real Estate)</div>
-            <i class="fa fa-chevron-left arrow-icon"></i>
-        </a>
-        
-        <a href="law-office.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-balance-scale">*</i> مكتب المحاماة (Law Office)</div>
-            <i class="fa fa-chevron-left arrow-icon"></i>
-        </a>
-        
-        <a href="lux-fashion-store.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-shirt"></i> متجر الفاشن (Lux Fashion)</div>
-            <i class="fa fa-chevron-left arrow-icon"></i>
-        </a>
-        
-        <a href="tour.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-map-marked-alt"></i> الجولات السياحية (Tour)</div>
-            <i class="fa fa-chevron-left arrow-icon"></i>
-        </a>
+        <div class="links-container">
+            <a href="nexus-store.html" target="_blank" class="project-card">
+                <div class="project-info"><i class="fa fa-store"></i> متجر نيكس (Nexus Store)</div>
+                <i class="fa fa-chevron-left arrow-icon"></i>
+            </a>
+            
+            <a href="restaurant.html" target="_blank" class="project-card">
+                <div class="project-info"><i class="fa fa-utensils"></i> المطعم (Restaurant)</div>
+                <i class="fa fa-chevron-left arrow-icon"></i>
+            </a>
+            
+            <a href="real-estate.html" target="_blank" class="project-card">
+                <div class="project-info"><i class="fa fa-building"></i> العقارات (Real Estate)</div>
+                <i class="fa fa-chevron-left arrow-icon"></i>
+            </a>
+            
+            <a href="law-office.html" target="_blank" class="project-card">
+                <div class="project-info"><i class="fa fa-balance-scale"></i> مكتب المحاماة (Law Office)</div>
+                <i class="fa fa-chevron-left arrow-icon"></i>
+            </a>
+            
+            <a href="lux-fashion-store.html" target="_blank" class="project-card">
+                <div class="project-info"><i class="fa fa-shirt"></i> متجر الفاشن (Lux Fashion)</div>
+                <i class="fa fa-chevron-left arrow-icon"></i>
+            </a>
+            
+            <a href="tour.html" target="_blank" class="project-card">
+                <div class="project-info"><i class="fa fa-map-marked-alt"></i> الجولات السياحية (Tour)</div>
+                <i class="fa fa-chevron-left arrow-icon"></i>
+            </a>
+        </div>
     </div>
 
-    <div style="margin-top: 50px; color: #64748b; font-size: 13px;">
+    <div class="footer-box">
         جميع الحقوق محفوظة © 2026 - أويس
     </div>
 

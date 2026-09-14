@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض مشاريع أويس</title>
+    
+    <!-- تحسين سرعة الاتصال بالمصادر الخارجية مسبقاً -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
         body { background: #0f172a; color: #f8fafc; text-align: center; padding: 60px 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; }
@@ -17,15 +24,13 @@
 
         .links-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; width: 100%; max-width: 900px; margin: 0 auto; }
         
-        .project-card { background: #1e293b; color: #fff; padding: 20px 25px; border-radius: 12px; text-decoration: none; font-size: 17px; font-weight: 600; transition: 0.3s; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-        .project-card:hover { transform: translateY(-5px); background: #27354f; border-color: #c5a059; color: #c5a059; box-shadow: 0 10px 25px rgba(197, 160, 89, 0.15); }
+        .project-card { background: #1e293b; color: #fff; padding: 20px 25px; border-radius: 12px; text-decoration: none; font-size: 17px; font-weight: 600; transition: transform 0.2s ease, background 0.2s ease; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 20px rgba(0,0,0,0.2); will-change: transform; }
+        .project-card:hover { transform: translateY(-3px); background: #27354f; border-color: #c5a059; color: #c5a059; }
         
         .project-info { display: flex; align-items: center; gap: 15px; }
         .project-info i { font-size: 22px; color: #c5a059; width: 30px; text-align: center; }
-        .arrow-icon { color: #64748b; font-size: 14px; transition: 0.3s; }
+        .arrow-icon { color: #64748b; font-size: 14px; transition: transform 0.2s ease; }
         .project-card:hover .arrow-icon { color: #c5a059; transform: translateX(-4px); }
-
-        footer-note { margin-top: 50px; color: #64748b; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -52,7 +57,7 @@
         </a>
         
         <a href="law-office.html" target="_blank" class="project-card">
-            <div class="project-info"><i class="fa fa-balance-scale"></i> مكتب المحاماة (Law Office)</div>
+            <div class="project-info"><i class="fa fa-balance-scale">*</i> مكتب المحاماة (Law Office)</div>
             <i class="fa fa-chevron-left arrow-icon"></i>
         </a>
         

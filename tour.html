@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الامير | للسياحة والسفر</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #030712; color: #f8fafc; line-height: 1.7; position: relative; overflow-x: hidden; }
+
+        /* سماء ليلية ونجوم كثيرة ومتلألئة مع شهب طويلة */
+        .space-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; background: radial-gradient(circle at 50% 20%, #0f172a 0%, #030712 100%); }
+        
+        .star { position: absolute; background: #ffffff; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; opacity: 0.6; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 8px #e879f9; } }
+
+        /* شهب طويلة وفاخرة */
+        .shooting-star { position: absolute; height: 3px; background: linear-gradient(270deg, rgba(232,121,249,1), rgba(147,51,234,0.6), rgba(255,255,255,0)); border-radius: 999px; filter: drop-shadow(0 0 10px #c084fc); animation: shootLong 3s ease-out forwards; opacity: 0; }
+        @keyframes shootLong {
+            0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 1; }
+            100% { transform: translateX(-900px) translateY(550px) rotate(-35deg); opacity: 0; }
+        }
+
+        /* شريط التنقل المظلم */
+        header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); padding: 16px 7%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(168, 85, 247, 0.2); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+        .logo-area { display: flex; flex-direction: column; }
+        .logo { font-size: 21px; font-weight: 800; color: #c084fc; }
+        .logo span { color: #f472b6; }
+        .sub-logo { font-size: 11px; font-weight: 600; color: #94a3b8; letter-spacing: 0.5px; }
+        
+        .header-badge { background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #e879f9; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+        .header-badge span { background: #9333ea; color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+
+        /* واجهة ترحيبية مظلمة */
+        .hero { padding: 50px 20px 30px; text-align: center; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero h1 { font-size: 34px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero h1 span { background: linear-gradient(135deg, #c084fc, #e879f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 15px; color: #94a3b8; font-weight: 400; }
+
+        .container { max-width: 1200px; margin: 20px auto 60px; padding: 0 20px; position: relative; z-index: 1; }
+        
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; }
+        .section-title { font-size: 19px; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 10px; }
+        .section-title::before { content: ''; display: inline-block; width: 6px; height: 20px; background: #c084fc; border-radius: 3px; }
+        .dest-count { font-size: 13px; color: #94a3b8; font-weight: 600; }
+
+        /* شبكة الكروت بإطار بنفسجي ليلي مظلم وساطع عند التحويم */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        
+        .card { background: #0f172a; border: 2px solid rgba(147, 51, 234, 0.4); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(168, 85, 247, 0.25); border-color: #d946ef; }
+        
+        .card-img-box { height: 170px; background: #1e1b4b; position: relative; overflow: hidden; }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.9; }
+        .card:hover .card-img-box img { transform: scale(1.05); opacity: 1; }
+        
+        /* شارة السعر بالأبيض الصريح بدون أي إطار وبدون خلفية شفافة لتعود كما طلبته وبوضوح تام */
+        .price-badge { position: absolute; top: 12px; left: 12px; color: #ffffff; font-size: 16px; font-weight: 900; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.8); z-index: 10; letter-spacing: 0.5px; }
+
+        .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-body h3 { font-size: 16px; font-weight: 700; color: #f8fafc; margin-bottom: 6px; }
+        .card-body p { font-size: 13px; color: #94a3b8; margin-bottom: 18px; flex-grow: 1; }
+        
+        .book-btn { background: rgba(147, 51, 234, 0.15); color: #e879f9; border: 1px solid rgba(168, 85, 247, 0.4); padding: 10px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; width: 100%; transition: all 0.2s; }
+        .book-btn:hover { background: #9333ea; color: #ffffff; border-color: #d946ef; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); }
+
+        /* قسم الحجوزات المظلم */
+        .executive-booking-section { background: #0f172a; border: 2px solid rgba(147, 51, 234, 0.4); border-radius: 16px; padding: 35px; margin-top: 60px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
+        .exec-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 18px; margin-bottom: 24px; }
+        .exec-header h2 { font-size: 18px; font-weight: 800; color: #ffffff; }
+        
+        .exec-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 25px; }
+        .exec-table { width: 100%; border-collapse: collapse; text-align: right; font-size: 13px; }
+        .exec-table th { background: #1e1b4b; color: #e879f9; padding: 12px 16px; font-weight: 700; border-bottom: 2px solid rgba(168, 85, 247, 0.4); }
+        .exec-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; }
+        
+        .qty-box-inline { display: inline-flex; align-items: center; gap: 10px; background: #1e293b; border: 1px solid rgba(168, 85, 247, 0.3); padding: 4px 10px; border-radius: 8px; }
+        .qty-box-inline button { background: none; border: none; font-weight: bold; cursor: pointer; font-size: 15px; color: #e879f9; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; }
+        .qty-box-inline button:hover { color: #ffffff; }
+        
+        .delete-row-btn { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .delete-row-btn:hover { background: #dc2626; color: #ffffff; border-color: #dc2626; }
+
+        .exec-footer { display: flex; justify-content: space-between; align-items: center; background: #1e1b4b; padding: 20px 24px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.3); }
+        .exec-total-label { font-size: 15px; font-weight: 600; color: #cbd5e1; }
+        .exec-total-label span { font-size: 22px; font-weight: 800; color: #e879f9; margin-right: 8px; }
+        
+        .exec-checkout-btn { background: linear-gradient(135deg, #9333ea, #d946ef); color: #ffffff; border: none; padding: 12px 30px; font-weight: 700; font-size: 14px; border-radius: 8px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4); }
+        .exec-checkout-btn:hover { opacity: 0.9; }
+
+        footer { text-align: center; padding: 30px; color: #94a3b8; font-size: 13px; background: #030712; border-top: 1px solid rgba(168, 85, 247, 0.2); margin-top: 60px; position: relative; z-index: 1; }
+
+        .toast-popup { position: fixed; bottom: 30px; left: 30px; background: #1e1b4b; color: #ffffff; padding: 12px 24px; border-radius: 10px; font-size: 13px; font-weight: 600; transform: translateY(100px); opacity: 0; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(168,85,247,0.5); border-right: 4px solid #d946ef; }
+        .toast-popup.show { transform: translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- السماء الليلية مع عدد نجوم مضاعف -->
+    <div class="space-bg" id="spaceBg"></div>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo">الامير <span>للسياحة</span></div>
+            <div class="sub-logo">للسياحة والسفر</div>
+        </div>
+        <div class="header-badge">
+            عربة الحجوزات
+            <span id="headerCount">0</span>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>اكتشف العالم مع <span>الامير للسياحة</span></h1>
+        <p>استعرض أكثر من 20 وجهة عالمية ومحلية مصممة خصيصاً لتمنحك رحلة الأحلام بكل سهولة وراحة.</p>
+    </div>
+
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">وجهات السفر المتاحة</h2>
+            <span class="dest-count">أكثر من 20 وجهة عالمية</span>
+        </div>
+        
+        <div class="grid">
+            <!-- 1 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">320$</span><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=400&q=70" alt="إسطنبول"></div>
+                <div class="card-body"><h3>جولة إسطنبول التاريخية</h3><p>عبق التاريخ ومضيق البسفور في تركيا.</p><button class="book-btn" onclick="addTrip('جولة إسطنبول التاريخية', 320, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 2 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">540$</span><img src="https://images.unsplash.com/photo-1543785734-4b6e564642f8?auto=format&fit=crop&w=400&q=70" alt="مدريد"></div>
+                <div class="card-body"><h3>رحلة مدريد الساحرة</h3><p>عاصمة الثقافة والفن الإسباني العريق.</p><button class="book-btn" onclick="addTrip('رحلة مدريد الساحرة', 540, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 3 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">400$</span><img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=400&q=70" alt="مكة المكرمة"></div>
+                <div class="card-body"><h3>رحلة مكة المكرمة</h3><p>باقات العمرة وزيارة الأماكن المقدسة.</p><button class="book-btn" onclick="addTrip('رحلة مكة المكرمة', 400, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 4 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">950$</span><img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=400&q=70" alt="اليابان"></div>
+                <div class="card-body"><h3>استكشاف اليابان العصرية</h3><p>طوكيو وجبل فوجي الساحر.</p><button class="book-btn" onclick="addTrip('استكشاف اليابان العصرية', 950, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 5 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">450$</span><img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=400&q=70" alt="سويسرا"></div>
+                <div class="card-body"><h3>جبال الألب السويسرية</h3><p>طبيعة خلابة لعشاق التزلج والاسترخاء.</p><button class="book-btn" onclick="addTrip('جبال الألب السويسرية', 450, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 6 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">850$</span><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=400&q=70" alt="المالديف"></div>
+                <div class="card-body"><h3>جزر المالديف الفاخرة</h3><p>منتجعات فوق الماء ومياه صافية.</p><button class="book-btn" onclick="addTrip('جزر المالديف الفاخرة', 850, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 7 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">600$</span><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=70" alt="باريس"></div>
+                <div class="card-body"><h3>سحر باريس الفرنسية</h3><p>برج إيفل وأجمل المقاهي الأوروبية.</p><button class="book-btn" onclick="addTrip('سحر باريس الفرنسية', 600, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 8 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">700$</span><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400&q=70" alt="لندن"></div>
+                <div class="card-body"><h3>جولة لندن الملكية</h3><p>معالم بريطانيا العظمى وساعة بيغ بن.</p><button class="book-btn" onclick="addTrip('جولة لندن الملكية', 700, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 9 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">500$</span><img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=400&q=70" alt="دبي"></div>
+                <div class="card-body"><h3>رحلة دبي المتألقة</h3><p>أطول برج في العالم وتسوق بلا حدود.</p><button class="book-btn" onclick="addTrip('رحلة دبي المتألقة', 500, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 10 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">380$</span><img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=400&q=70" alt="القاهرة"></div>
+                <div class="card-body"><h3>أسرار القاهرة التاريخية</h3><p>الأهرامات ونهر النيل الخالد.</p><button class="book-btn" onclick="addTrip('أسرار القاهرة التاريخية', 380, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 11 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">750$</span><img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=400&q=70" alt="روما"></div>
+                <div class="card-body"><h3>روما الإيطالية العريقة</h3><p>الكولوسيوم والآثار الرومانية الخالدة.</p><button class="book-btn" onclick="addTrip('روما الإيطالية العريقة', 750, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 12 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">680$</span><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=400&q=70" alt="بانكوك"></div>
+                <div class="card-body"><h3>مغامرة بانكوك التايلاندية</h3><p>المعابد الساحرة والأسواق العائمة.</p><button class="book-btn" onclick="addTrip('مغامرة بانكوك التايلاندية', 680, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 13 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">820$</span><img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=400&q=70" alt="سيدني"></div>
+                <div class="card-body"><h3>رحلة سيدني الأسترالية</h3><p>دار الأوبرا والشواطئ الذهبية الرائعة.</p><button class="book-btn" onclick="addTrip('رحلة سيدني الأسترالية', 820, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 14 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">900$</span><img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=400&q=70" alt="نيويورك"></div>
+                <div class="card-body"><h3>نبض نيويورك الأمريكية</h3><p>تايمز سكوير وناطحات السحاب العملاقة.</p><button class="book-btn" onclick="addTrip('نبض نيويورك الأمريكية', 900, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 15 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">480$</span><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=70" alt="أبوظبي"></div>
+                <div class="card-body"><h3>جولة أبوظبي السياحية</h3><p>جامع الشيخ زايد والجزيرة الخلابة.</p><button class="book-btn" onclick="addTrip('جولة أبوظبي السياحية', 480, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 16 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">560$</span><img src="https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=400&q=70" alt="براغ"></div>
+                <div class="card-body"><h3>سحر مدينة براغ التشيكية</h3><p>الجسور التاريخية والعمارة القوطية.</p><button class="book-btn" onclick="addTrip('سحر مدينة براغ التشيكية', 560, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 17 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">630$</span><img src="https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=400&q=70" alt="أمستردام"></div>
+                <div class="card-body"><h3>قنوات أمستردام المائية</h3><p>رحلات القوارب وطواحين الهواء الهولندية.</p><button class="book-btn" onclick="addTrip('قنوات أمستردام المائية', 630, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 18 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">410$</span><img src="https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=400&q=70" alt="المنامة"></div>
+                <div class="card-body"><h3>استرخاء المنامة البحرينية</h3><p>أسواق تراثية ومياه بحرية هادئة.</p><button class="book-btn" onclick="addTrip('استرخاء المنامة البحرينية', 410, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 19 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">720$</span><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=400&q=70" alt="سانتوريني"></div>
+                <div class="card-body"><h3>غروب سانتوريني اليونانية</h3><p>البيوت البيضاء والمطلة على بحر إيجة.</p><button class="book-btn" onclick="addTrip('غروب سانتوريني اليونانية', 720, this)">اختر الرحلة</button></div>
+            </div>
+            <!-- 20 -->
+            <div class="card">
+                <div class="card-img-box"><span class="price-badge">880$</span><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=70" alt="كندا"></div>
+                <div class="card-body"><h3>طبيعة كندا الساحرة</h3><p>البحيرات الفيروزية وجبال روكي العظيمة.</p><button class="book-btn" onclick="addTrip('طبيعة كندا الساحرة', 880, this)">اختر الرحلة</button></div>
+            </div>
+        </div>
+
+        <!-- جدول الحجوزات المظلم -->
+        <div class="executive-booking-section" id="execSection">
+            <div class="exec-header">
+                <h2>جدول إدارة الحجوزات والملخص التنفيذي</h2>
+                <span style="font-size: 13px; color: #94a3b8;" id="tableSubCount">لا توجد حجوزات نشطة</span>
+            </div>
+
+            <div class="exec-table-wrapper">
+                <table class="exec-table">
+                    <thead>
+                        <tr>
+                            <th>الوجهة السياحية</th>
+                            <th>السعر الفردي</th>
+                            <th>عدد الأفراد</th>
+                            <th>المجموع الفرعي</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="execTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">لم تقم باضافة أي وجهة سياحية إلى جدول الحجوزات بعد..</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="exec-footer">
+                <div class="exec-total-label">إجمالي التكلفة الكلية: <span id="execTotalPrice">0</span> دولار</div>
+                <button class="exec-checkout-btn" onclick="checkoutExec()">تأكيد وإرسال الحجز</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة © 2026 - الامير للسياحة والسفر
+    </footer>
+
+    <div class="toast-popup" id="toastMsg">تمت إضافة الوجهة للجدول بنجاح</div>
+
+    <script>
+        // توليد عدد أكبر بكثير من النجوم في الخلفية لتملأ الشاشة
+        const spaceBg = document.getElementById('spaceBg');
+        for (let i = 0; i < 110; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            let size = Math.random() * 2.5 + 0.8 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.animationDelay = (Math.random() * 4) + 's';
+            spaceBg.appendChild(star);
+        }
+
+        // إطلاق شهاب طويل وفاخر كل 8 ثوانٍ
+        setInterval(() => {
+            let shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.top = (Math.random() * 30) + '%';
+            shootingStar.style.left = (Math.random() * 50 + 50) + '%';
+            shootingStar.style.width = '220px';
+            spaceBg.appendChild(shootingStar);
+            setTimeout(() => shootingStar.remove(), 3000);
+        }, 8000);
+
+        let selectedTrips = [];
+
+        function addTrip(name, price, btn) {
+            if (btn.dataset.lock === "true") return;
+            btn.dataset.lock = "true";
+            setTimeout(() => btn.dataset.lock = "false", 300);
+
+            let item = selectedTrips.find(i => i.name === name);
+            if (item) {
+                item.qty++;
+            } else {
+                selectedTrips.push({ name, price, qty: 1 });
+            }
+            renderExecTable();
+            showToast();
+        }
+
+        function renderExecTable() {
+            let tbody = document.getElementById('execTableBody');
+            let headerCount = document.getElementById('headerCount');
+            let tableSubCount = document.getElementById('tableSubCount');
+            let execTotalPrice = document.getElementById('execTotalPrice');
+
+            tbody.innerHTML = '';
+            if (selectedTrips.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">لم تقم باضافة أي وجهة سياحية إلى جدول الحجوزات بعد..</td></tr>';
+                headerCount.innerText = '0';
+                tableSubCount.innerText = 'لا توجد حجوزات نشطة';
+                execTotalPrice.innerText = '0';
+                return;
+            }
+
+            let totalCount = 0;
+            let grandTotal = 0;
+            let rowsHtml = '';
+
+            selectedTrips.forEach((trip, index) => {
+                totalCount += trip.qty;
+                let subtotal = trip.price * trip.qty;
+                grandTotal += subtotal;
+
+                rowsHtml += `
+                    <tr>
+                        <td><strong>${trip.name}</strong></td>
+                        <td>${trip.price}$</td>
+                        <td>
+                            <div class="qty-box-inline">
+                                <button onclick="changeTripQty(${index}, -1)">-</button>
+                                <span>${trip.qty}</span>
+                                <button onclick="changeTripQty(${index}, 1)">+</button>
+                            </div>
+                        </td>
+                        <td><strong>${subtotal}$</strong></td>
+                        <td>
+                            <button class="delete-row-btn" onclick="removeTrip(${index})">حذف</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = rowsHtml;
+            headerCount.innerText = totalCount;
+            tableSubCount.innerText = `${totalCount} عناصر مسجلة في الجدول`;
+            execTotalPrice.innerText = grandTotal;
+        }
+
+        function changeTripQty(index, val) {
+            selectedTrips[index].qty += val;
+            if (selectedTrips[index].qty <= 0) {
+                selectedTrips.splice(index, 1);
+            }
+            renderExecTable();
+        }
+
+        function removeTrip(index) {
+            selectedTrips.splice(index, 1);
+            renderExecTable();
+        }
+
+        function showToast() {
+            let t = document.getElementById('toastMsg');
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 1400);
+        }
+
+        function checkoutExec() {
+            if (selectedTrips.length === 0) {
+                alert('الجدول فارغ. يرجى اختيار رحلة واحدة على الأقل.');
+                return;
+            }
+            alert('تم تأكيد حجزك السياحي بنجاح عبر نظام الامير للسياحة والسفر!');
+            selectedTrips = [];
+            renderExecTable();
+        }
+    </script>
+</body>
+</html>

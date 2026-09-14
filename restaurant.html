@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم مائدتي | الضيافة الفاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #080808; color: #f1f1f1; line-height: 1.6; }
+
+        .top-bar { background: #111; border-bottom: 1px solid #222; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #aaa; flex-wrap: wrap; gap: 10px; }
+        .currency-box select { background: #1a1a1a; color: #d4af37; border: 1px solid #d4af37; padding: 4px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; outline: none; }
+
+        header { background: rgba(8, 8, 8, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1f1f1f; }
+        .logo { font-size: 26px; font-weight: 900; color: #fff; }
+        .logo span { color: #d4af37; }
+        .cart-btn-nav { background: #d4af37; color: #080808; padding: 8px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; border: none; transition: 0.3s; }
+        .cart-btn-nav:hover { background: #fff; }
+
+        .hero { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80') center/cover; padding: 80px 20px; text-align: center; }
+        .hero h1 { font-size: 46px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+        .hero h1 span { color: #d4af37; }
+        .hero p { color: #aaa; font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+        .filter-tabs { display: flex; justify-content: center; gap: 10px; padding: 30px 20px; flex-wrap: wrap; }
+        .tab-btn { background: #141414; color: #aaa; border: 1px solid #222; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .tab-btn.active, .tab-btn:hover { background: #d4af37; color: #080808; border-color: #d4af37; }
+
+        .menu-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .food-card { background: #121212; border: 1px solid #222; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+        .food-card:hover { transform: translateY(-5px); border-color: #d4af37; box-shadow: 0 8px 25px rgba(212,175,55,0.15); }
+        .food-img { height: 190px; background-size: cover; background-position: center; position: relative; }
+        .food-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #d4af37; border: 1px solid #d4af37; padding: 2px 10px; font-size: 12px; border-radius: 4px; }
+        .food-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .food-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .food-info h3 { font-size: 18px; color: #fff; }
+        .food-price { color: #d4af37; font-size: 18px; font-weight: bold; }
+        .food-content p { color: #888; font-size: 13px; margin-bottom: 20px; flex-grow: 1; }
+        
+        .order-btn { background: transparent; color: #d4af37; border: 1px solid #d4af37; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
+        .order-btn:hover:not(:disabled) { background: #d4af37; color: #080808; }
+        .order-btn:disabled { background: #222; color: #666; border-color: #333; cursor: not-allowed; }
+
+        .cart-section { max-width: 800px; margin: 40px auto; background: #121212; border: 1px solid #d4af37; border-radius: 12px; padding: 25px; }
+        .cart-section h2 { color: #d4af37; margin-bottom: 20px; font-size: 22px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .cart-items-list { list-style: none; margin-bottom: 20px; max-height: 250px; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #1a1a1a; font-size: 14px; gap: 10px; }
+        .cart-item-controls { display: flex; align-items: center; gap: 10px; }
+        .cart-item-controls button { background: #222; color: #d4af37; border: 1px solid #d4af37; width: 26px; height: 26px; border-radius: 4px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .cart-item-controls button:hover { background: #d4af37; color: #080808; }
+        .delete-btn { background: #ff4d4d !important; color: #fff !important; border: none !important; width: auto !important; height: auto !important; padding: 4px 10px !important; font-size: 12px; border-radius: 4px; cursor: pointer; }
+        
+        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 20px; }
+        .checkout-btn { background: #d4af37; color: #080808; border: none; width: 100%; padding: 12px; font-weight: bold; font-size: 16px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .checkout-btn:hover { background: #fff; }
+
+        footer { background: #0d0d0d; border-top: 1px solid #222; text-align: center; padding: 30px; color: #777; font-size: 13px; }
+
+        .toast { position: fixed; bottom: 20px; left: 20px; background: #d4af37; color: #080808; padding: 12px 24px; border-radius: 6px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transform: translateY(100px); opacity: 0; transition: 0.4s; z-index: 2000; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div><i class="fa fa-phone" style="color: #d4af37;"></i> +963 939 916 838 | دمشق، سوريا</div>
+        <div class="currency-box">
+            <label>اختر العملة: </label>
+            <select id="currencySelect" onchange="changeCurrency()">
+                <option value="درهم">درهم إماراتي (AED)</option>
+                <option value="ريال">ريال سعودي (SAR)</option>
+                <option value="ليرة">ليرة سورية (SYP)</option>
+                <option value="دولار" selected>دولار أمريكي (USD)</option>
+            </select>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo">مائدتي <span>الملكي</span></div>
+        <button class="cart-btn-nav" onclick="scrollToCart()"><i class="fa fa-shopping-cart"></i> السلة (<span id="cartCount">0</span>)</button>
+    </header>
+
+    <section class="hero">
+        <h1>أفخم المأكولات والمشروبات <span>بطلب مباشر</span></h1>
+        <p>تفضل باختيار أطباقك المفضلة، أضفها للسلة، واستمتع بتجربة طعام ملكية لا تُنسى.</p>
+    </section>
+
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterMenu('all', this)">الكل</button>
+        <button class="tab-btn" onclick="filterMenu('main', this)">الأطباق الرئيسية</button>
+        <button class="tab-btn" onclick="filterMenu('grill', this)">المشاوي الفاخرة</button>
+        <button class="tab-btn" onclick="filterMenu('drink', this)">المشروبات والعصائر</button>
+        <button class="tab-btn" onclick="filterMenu('dessert', this)">الحلويات</button>
+    </div>
+
+    <div class="menu-container" id="menuGrid">
+        <div class="food-card" data-category="main">
+            <div class="food-img" style="background-image: url('https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=600&q=80');">
+                <span class="food-tag">رئيسي</span>
+            </div>
+            <div class="food-content">
+                <div class="food-info">
+                    <h3>مندي لحم ضاني ملكي</h3>
+                    <span class="food-price"><span class="price-val" data-base="25">25</span> <span class="curr-symbol">دولار</span></span>
+                </div>
+                <p>لحم ترف مطهو على البطيء مع خلطة الأرز والبهارات العطرية والمكسرات.</p>
+                <button class="order-btn" onclick="addToCart(this, 'مندي لحم ضاني ملكي', 25)">أضف للسلة</button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="grill">
+            <div class="food-img" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80');">
+                <span class="food-tag">مشاوي</span>
+            </div>
+            <div class="food-content">
+                <div class="food-info">
+                    <h3>مشاوي مشكلة فاخرة</h3>
+                    <span class="food-price"><span class="price-val" data-base="30">30</span> <span class="curr-symbol">دولار</span></span>
+                </div>
+                <p>تشكيلة كباب، تكا، شيش طاووق وريش غنم طازجة مشوية على الفحم.</p>
+                <button class="order-btn" onclick="addToCart(this, 'مشاوي مشكلة فاخرة', 30)">أضف للسلة</button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="main">
+            <div class="food-img" style="background-image: url('https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80');">
+                <span class="food-tag">شعبي</span>
+            </div>
+            <div class="food-content">
+                <div class="food-info">
+                    <h3>كبسة دجاج مدخن</h3>
+                    <span class="food-price"><span class="price-val" data-base="18">18</span> <span class="curr-symbol">دولار</span></span>
+                </div>
+                <p>دجاج بلدي محمر بنكهة التدخين المميزة مع أرز الكبسة الأصيل.</p>
+                <button class="order-btn" onclick="addToCart(this, 'كبسة دجاج مدخن', 18)">أضف للسلة</button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="drink">
+            <div class="food-img" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80');">
+                <span class="food-tag">مشروبات</span>
+            </div>
+            <div class="food-content">
+                <div class="food-info">
+                    <h3>كوكتيل استوائي خاص</h3>
+                    <span class="food-price"><span class="price-val" data-base="8">8</span> <span class="curr-symbol">دولار</span></span>
+                </div>
+                <p>مزيج منعش من الفواكه الاستوائية الطازجة والعصائر الطبيعية.</p>
+                <button class="order-btn" onclick="addToCart(this, 'كوكتيل استوائي خاص', 8)">أضف للسلة</button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="drink">
+            <div class="food-img" style="background-image: url('https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80');">
+                <span class="food-tag">مشروبات</span>
+            </div>
+            <div class="food-content">
+                <div class="food-info">
+                    <h3>موهيتو بالنعناع والليمون</h3>
+                    <span class="food-price"><span class="price-val" data-base="6">6</span> <span class="curr-symbol">دولار</span></span>
+                </div>
+                <p>مشروب الصودا المنعش مع أوراق النعناع الطازجة وشرائح الليمون الحامض.</p>
+                <button class="order-btn" onclick="addToCart(this, 'موهيتو بالنعناع والليمون', 6)">أضف للسلة</button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="dessert">
+            <div class="food-img" style="background-image: url('https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=600&q=80');">
+                <span class="food-tag">حلويات</span>
+            </div>
+            <div class="food-content">
+                <div class="food-info">
+                    <h3>كنافة نابلسية بالجبن</h3>
+                    <span class="food-price"><span class="price-val" data-base="10">10</span> <span class="curr-symbol">دولار</span></span>
+                </div>
+                <p>كنافة ساخنة بجبنة عكاوي مطاطية ومزينة بالفستق الحلبي الفاخر.</p>
+                <button class="order-btn" onclick="addToCart(this, 'كنافة نابلسية بالجبن', 10)">أضف للسلة</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="cart-section" id="cartSection">
+        <h2>سلة الطلبات الخاصة بك</h2>
+        <ul class="cart-items-list" id="cartItemsList">
+            <p id="emptyCartMsg" style="color: #666; text-align: center; padding: 20px;">السلة فارغة حالياً..</p>
+        </ul>
+        <div class="cart-total">
+            <span>المجموع الكلي:</span>
+            <span><span id="totalPrice">0</span> <span id="totalCurr">دولار</span></span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">تأكيد وإرسال الطلب</button>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 - مطعم مائدتي للضيافة الفاخرة</p>
+    </footer>
+
+    <div class="toast" id="toastMsg">تمت الإضافة إلى السلة بنجاح!</div>
+
+    <script>
+        let cart = [];
+        let currentCurrencyName = "دولار";
+        let currencyRates = { "دولار": 1, "درهم": 3.67, "ريال": 3.75, "ليرة": 15000 };
+
+        // إضافة وجبة للسلة مع حماية سريعة جداً ضد "الدبل كليك" العشوائي، مع السماح بزيادة الكمية متى ما حب الزبون
+        function addToCart(btn, name, basePrice) {
+            // منع النقر المزدوج السريع خلال أول نصف ثانية فقط (Debounce)
+            if (btn.dataset.clicked === "true") return;
+            btn.dataset.clicked = "true";
+            setTimeout(() => { btn.dataset.clicked = "false"; }, 500);
+
+            // البحث إذا الوجبة موجودة مسبقاً في السلة لزيادة كميتها
+            let existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, basePrice, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`تمت إضافة "${name}" للسلة`);
+        }
+
+        // زيادة الكمية من داخل السلة
+        function increaseQuantity(index) {
+            cart[index].quantity += 1;
+            updateCartUI();
+        }
+
+        // إنقاص الكمية من داخل السلة
+        function decreaseQuantity(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const listEl = document.getElementById('cartItemsList');
+            const countEl = document.getElementById('cartCount');
+            const totalEl = document.getElementById('totalPrice');
+
+            let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countEl.innerText = totalCount;
+            listEl.innerHTML = "";
+
+            if (cart.length === 0) {
+                listEl.innerHTML = `<p id="emptyCartMsg" style="color: #666; text-align: center; padding: 20px;">السلة فارغة حالياً..</p>`;
+                totalEl.innerText = "0";
+                return;
+            }
+
+            let total = 0;
+            let rate = currencyRates[currentCurrencyName];
+
+            cart.forEach((item, index) => {
+                let itemTotalConverted = (item.basePrice * item.quantity * rate).toFixed(2);
+                total += (item.basePrice * item.quantity * rate);
+
+                let li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <span style="color: #d4af37; font-size: 13px;">${itemTotalConverted} ${currentCurrencyName}</span>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button onclick="decreaseQuantity(${index})">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="increaseQuantity(${index})">+</button>
+                        <button class="delete-btn" onclick="removeFromCart(${index})"><i class="fa fa-trash"></i></button>
+                    </div>
+                `;
+                listEl.appendChild(li);
+            });
+
+            totalEl.innerText = total.toFixed(2);
+        }
+
+        function changeCurrency() {
+            let select = document.getElementById('currencySelect');
+            currentCurrencyName = select.value;
+            let rate = currencyRates[currentCurrencyName];
+
+            document.querySelectorAll('.curr-symbol').forEach(el => el.innerText = currentCurrencyName);
+            
+            document.querySelectorAll('.price-val').forEach(el => {
+                let base = parseFloat(el.getAttribute('data-base'));
+                el.innerText = (base * rate).toFixed(2);
+            });
+
+            updateCartUI();
+            document.getElementById('totalCurr').innerText = currentCurrencyName;
+        }
+
+        function filterMenu(category, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.food-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToCart() {
+            document.getElementById('cartSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("السلة فارغة! الرجاء إضافة بعض الوجبات أولاً.");
+                return;
+            }
+            alert("تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً لتأكيد التوصيل.");
+            cart = [];
+            updateCartUI();
+        }
+
+        function showToast(msg) {
+            let toast = document.getElementById('toastMsg');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

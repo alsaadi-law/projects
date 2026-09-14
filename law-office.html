@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتب السعدي للاستشارات والخدمات القانونية | الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #f8fafc; color: #1e293b; line-height: 1.7; }
+        
+        /* Top Bar */
+        .top-bar { background: #0f172a; color: #94a3b8; padding: 12px 8%; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .top-bar i { color: #c5a059; margin-left: 5px; }
+
+        /* Header */
+        header { background: #ffffff; padding: 18px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .logo { font-size: 26px; font-weight: 900; color: #0f172a; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: #c5a059; }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { color: #334155; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: #c5a059; }
+        .header-btn { background: #c5a059; color: #fff; padding: 10px 22px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .header-btn:hover { background: #b08d46; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80') center/cover; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; }
+        .hero h1 { font-size: 46px; margin-bottom: 20px; font-weight: 900; color: #fff; }
+        .hero h1 span { color: #c5a059; }
+        .hero p { font-size: 19px; margin-bottom: 35px; max-width: 750px; color: #cbd5e1; }
+        .hero-btns { display: flex; gap: 15px; }
+        .btn-gold { background: #c5a059; color: #fff; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-gold:hover { background: #b08d46; }
+        .btn-outline { border: 2px solid #fff; color: #fff; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-outline:hover { background: #fff; color: #0f172a; }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 34px; color: #0f172a; font-weight: 900; margin-bottom: 12px; }
+        .section-header p { color: #64748b; font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .service-card { background: #fff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: 0.3s; border-top: 4px solid #c5a059; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+        .service-card:hover { transform: translateY(-7px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .service-card i { font-size: 45px; color: #c5a059; margin-bottom: 20px; display: block; }
+        .service-card h3 { font-size: 22px; color: #0f172a; margin-bottom: 15px; font-weight: bold; }
+        .service-card p { color: #64748b; font-size: 15px; }
+
+        /* About & Stats */
+        .about-section { background: #fff; padding: 80px 8%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-content h2 { font-size: 32px; color: #0f172a; margin-bottom: 20px; font-weight: 900; }
+        .about-content p { color: #64748b; margin-bottom: 20px; font-size: 16px; }
+        .about-img { background: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80') center/cover; height: 400px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+
+        /* Stats Bar */
+        .stats-bar { background: #0f172a; color: #fff; padding: 60px 8%; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
+        .stat-item h3 { font-size: 42px; color: #c5a059; margin-bottom: 10px; font-weight: 900; }
+        .stat-item p { color: #94a3b8; font-size: 16px; }
+
+        /* Footer */
+        footer { background: #090d16; color: #fff; padding: 60px 8% 25px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h3 { color: #c5a059; font-size: 18px; margin-bottom: 20px; font-weight: bold; }
+        .footer-col p, .footer-col a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; transition: 0.3s; }
+        .footer-col a:hover { color: #fff; }
+        .footer-bottom { text-align: border-top; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 25px; text-align: center; font-size: 13px; color: #64748b; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div><i class="fa fa-phone"></i> +963 939 916 838 | <i class="fa fa-envelope"></i> alsaadiowais20@gmail.com</div>
+        <div><i class="fa fa-map-marker-alt"></i> دمشق - سوريا</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"><i class="fa fa-balance-scale" style="color: #c5a059;"></i> مكتب <span>السعدي</span></div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#about">من نحن</a>
+            <a href="#contact">اتصل بنا</a>
+        </nav>
+        <a href="#contact" class="header-btn">استشارة فورية</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>حماية قانونية متكاملة <span>وخبرة موثوقة</span></h1>
+        <p>نقدم خدمات الاستشارات القانونية، صياغة العقود، وتمثيل الشركات والأفراد أمام كافة الجهات القضائية بكفاءة واحترافية عالية.</p>
+        <div class="hero-btns">
+            <a href="#contact" class="btn-gold">احجز استشارتك</a>
+            <a href="#services" class="btn-outline">استكشف خدماتنا</a>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <h3>+500</h3>
+            <p>قضية ناجحة</p>
+        </div>
+        <div class="stat-item">
+            <h3>+15</h3>
+            <p>سنة خبرة قانونية</p>
+        </div>
+        <div class="stat-item">
+            <h3>100%</h3>
+            <p>سرية وخصوصية</p>
+        </div>
+        <div class="stat-item">
+            <h3>+200</h3>
+            <p>شركة وموكل دائم</p>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="container" id="services">
+        <div class="section-header">
+            <h2>خدماتنا القانونية المتخصصة</h2>
+            <p>نغطي كافة القطاعات التجارية والمدنية والجنائية لضمان حقوقك ومصالحك</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fa fa-gavel"></i>
+                <h3>التقاضي والتمثيل القضائي</h3>
+                <p>مرافعة وتمثيل قانوني أمام المحاكم بمختلف درجاتها باحترافية تامة لحماية حقوق الموكلين.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa fa-file-contract"></i>
+                <h3>صياغة ومراجعة العقود</h3>
+                <p>صياغة العقود التجارية والمالية وعقود الشركات بدقة لتقليل المخاطر القانونية المحتملة.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa fa-handshake-angle"></i>
+                <h3>الاستشارات التجارية والشركات</h3>
+                <p>استشارات تأسيس الشركات، تسوية النزاعات التجارية، وحل الإشكالات القانونية للمنشآت.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <h2>نلتزم بأعلى معايير العدالة والنزاهة المهنية</h2>
+            <p>يتميز مكتب السعدي بفريق قانوني ذو خبرة عريقة في معالجة القضايا المعقدة وتقديم الحلول الاستراتيجية للأفراد والشركات الكبرى داخل سوريا وخارجها.</p>
+            <p>هدفنا الأساسي هو بناء علاقة ثقة مستدامة مع عملائنا عبر تقديم الدعم القانوني السريع والفعال الذي يضمن حقوقهم بالكامل.</p>
+            <a href="#contact" class="btn-gold" style="display: inline-block; margin-top: 15px;">تواصل مع المحامي مباشرة</a>
+        </div>
+        <div class="about-img"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>مكتب السعدي</h3>
+                <p>مرجعك القانوني الموثوق لتقديم الحلول والخدمات الاستشارية الشاملة بأعلى معايير المهنية.</p>
+            </div>
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <a href="#">الرئيسية</a>
+                <a href="#services">الخدمات</a>
+                <a href="#about">عن المكتب</a>
+                <a href="#contact">اتصل بنا</a>
+            </div>
+            <div class="footer-col">
+                <h3>معلومات التواصل</h3>
+                <p><i class="fa fa-map-marker-alt"></i> دمشق - سوريا</p>
+                <p><i class="fa fa-phone"></i> +963 939 916 838</p>
+                <p><i class="fa fa-envelope"></i> alsaadiowais20@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2026 - مكتب السعدي للاستشارات القانونية</p>
+        </div>
+    </footer>
+
+</body>
+</html>

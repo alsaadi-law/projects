@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دار الخليج للعقارات الفاخرة | الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #f4f6f9; color: #333; line-height: 1.6; }
+        
+        /* Top Bar */
+        .top-bar { background: #0c1821; color: #a5b4fc; padding: 10px 8%; display: flex; justify-content: space-between; font-size: 14px; }
+        .top-bar i { color: #d4af37; margin-left: 5px; }
+
+        /* Header */
+        header { background: #ffffff; padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo { font-size: 24px; font-weight: 900; color: #111; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: #d4af37; }
+        nav { display: flex; gap: 25px; align-items: center; }
+        nav a { color: #444; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: #d4af37; }
+        .cta-btn { background: #d4af37; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .cta-btn:hover { background: #b8972b; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(rgba(12, 24, 33, 0.75), rgba(12, 24, 33, 0.75)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80') center/cover; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; font-weight: 900; color: #fff; }
+        .hero h1 span { color: #d4af37; }
+        .hero p { font-size: 20px; margin-bottom: 35px; max-width: 700px; color: #e2e8f0; }
+
+        /* Advanced Search Bar */
+        .search-container { width: 85%; max-width: 1000px; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); margin: -50px auto 50px; position: relative; z-index: 10; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 150px; gap: 15px; align-items: center; }
+        .search-group label { display: block; font-size: 13px; color: #666; margin-bottom: 5px; font-weight: bold; }
+        .search-group select, .search-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; background: #fdfdfd; }
+        .search-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; height: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .search-btn:hover { background: #d4af37; color: #111; }
+
+        /* Main Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 32px; color: #111; font-weight: 900; margin-bottom: 10px; }
+        .section-header p { color: #666; font-size: 16px; }
+
+        /* Properties Grid */
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .property-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: 0.3s; border: 1px solid #eee; }
+        .property-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .property-img-container { height: 240px; background-size: cover; background-position: center; position: relative; }
+        .property-tag { position: absolute; top: 15px; right: 15px; background: #d4af37; color: #fff; padding: 5px 12px; border-radius: 4px; font-size: 13px; font-weight: bold; }
+        .property-content { padding: 25px; }
+        .property-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; color: #111; }
+        .property-location { color: #666; font-size: 14px; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
+        .property-price { color: #d4af37; font-size: 22px; font-weight: 900; margin-bottom: 20px; }
+        .property-features { display: flex; justify-content: space-between; border-top: 1px solid #eee; padding-top: 15px; color: #555; font-size: 14px; }
+        .property-features span { display: flex; align-items: center; gap: 6px; }
+
+        /* Services / Why Us Section */
+        .features-section { background: #fff; padding: 80px 8%; margin: 50px 0; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .feature-box { text-align: center; padding: 30px; border-radius: 10px; background: #f9fafb; transition: 0.3s; }
+        .feature-box:hover { background: #fdfaf0; border: 1px solid #d4af37; }
+        .feature-box i { font-size: 40px; color: #d4af37; margin-bottom: 20px; }
+        .feature-box h3 { font-size: 18px; margin-bottom: 10px; font-weight: bold; }
+        .feature-box p { color: #666; font-size: 14px; }
+
+        /* Contact Banner inside property site */
+        .interior-contact { background: linear-gradient(135deg, #0c1821, #1a2c3a); color: #fff; padding: 60px 20px; text-align: center; border-radius: 15px; margin: 60px 0; }
+        .interior-contact h2 { font-size: 32px; margin-bottom: 15px; color: #d4af37; }
+        .interior-contact p { margin-bottom: 25px; font-size: 16px; color: #cbd5e1; }
+        .btn-white { background: #fff; color: #111; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; }
+        .btn-white:hover { background: #d4af37; color: #fff; }
+
+        /* Footer */
+        footer { background: #0c1821; color: #fff; padding: 50px 8% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h3 { color: #d4af37; font-size: 18px; margin-bottom: 20px; font-weight: bold; }
+        .footer-col p, .footer-col a { color: #a5b4fc; text-decoration: none; display: block; margin-bottom: 10px; font-size: 14px; transition: 0.3s; }
+        .footer-col a:hover { color: #fff; }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 13px; color: #888; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div><i class="fa fa-phone"></i> +971 4 000 0000 | <i class="fa fa-envelope"></i> info@dar-alkhaleej.com</div>
+        <div><i class="fa fa-clock"></i> السبت - الخميس: 9:00 ص - 6:00 م</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"><i class="fa fa-building" style="color: #d4af37;"></i> دار <span>الخليج</span></div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#">العقارات</a>
+            <a href="#">عن الشركة</a>
+            <a href="#">الخدمات</a>
+            <a href="#">اتصل بنا</a>
+        </nav>
+        <a href="#properties" class="cta-btn">تصفح العقارات</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>اكتشف أفخم <span>العقارات السكنية</span> في الشرق الأوسط</h1>
+        <p>نحن نقدم لك خيارات استثنائية من الفلل، القصور، والشقق الفاخرة للاستثمار أو السكن الراقي.</p>
+    </section>
+
+    <!-- Advanced Search Box -->
+    <div style="display: flex; justify-content: center;">
+        <div class="search-container">
+            <div class="search-group">
+                <label>نوع العقار</label>
+                <select>
+                    <option>جميع العقارات</option>
+                    <option>فيلا فاخرة</option>
+                    <option>شقة سكنية</option>
+                    <option>قصر ملكي</option>
+                    <option>مكتب تجاري</option>
+                </select>
+            </div>
+            <div class="search-group">
+                <label>المدينة / المنطقة</label>
+                <select>
+                    <option>جميع المدن</option>
+                    <option>دبي، الإمارات</option>
+                    <option>الرياض، السعودية</option>
+                    <option>الدوحة، قطر</option>
+                </select>
+            </div>
+            <div class="search-group">
+                <label>النطاق السعري</label>
+                <select>
+                    <option>أي ميزانية</option>
+                    <option>أقل من 2 مليون</option>
+                    <option>2 مليون - 5 مليون</option>
+                    <option>أكثر من 5 مليون</option>
+                </select>
+            </div>
+            <button class="search-btn"><i class="fa fa-search"></i> ابحث الآن</button>
+        </div>
+    </div>
+
+    <!-- Properties Section -->
+    <div class="container" id="properties">
+        <div class="section-header">
+            <h2>أحدث المشاريع والعقارات المميزة</h2>
+            <p>مجموعة مختارة بعناية لتلبي أسمى معايير الفخامة والرفاهية</p>
+        </div>
+
+        <div class="properties-grid">
+            <!-- Property 1 -->
+            <div class="property-card">
+                <div class="property-img-container" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80');">
+                    <span class="property-tag">للبيع</span>
+                </div>
+                <div class="property-content">
+                    <div class="property-title">فيلا النخلة الفاخرة</div>
+                    <div class="property-location"><i class="fa fa-map-marker-alt" style="color: #d4af37;"></i> نخلة جميرا، دبي</div>
+                    <div class="property-price">4,800,000 درهم</div>
+                    <div class="property-features">
+                        <span><i class="fa fa-bed"></i> 5 غرف</span>
+                        <span><i class="fa fa-bath"></i> 6 حمامات</span>
+                        <span><i class="fa fa-ruler-combined"></i> 520 م²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="property-card">
+                <div class="property-img-container" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80');">
+                    <span class="property-tag" style="background: #2563eb;">للإيجار</span>
+                </div>
+                <div class="property-content">
+                    <div class="property-title">برج راقي - إطلالة بحرية</div>
+                    <div class="property-location"><i class="fa fa-map-marker-alt" style="color: #d4af37;"></i> مرسى دبي، دبي</div>
+                    <div class="property-price">180,000 درهم / سنوياً</div>
+                    <div class="property-features">
+                        <span><i class="fa fa-bed"></i> 3 غرف</span>
+                        <span><i class="fa fa-bath"></i> 3 حمامات</span>
+                        <span><i class="fa fa-ruler-combined"></i> 210 م²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="property-card">
+                <div class="property-img-container" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80');">
+                    <span class="property-tag">للبيع</span>
+                </div>
+                <div class="property-content">
+                    <div class="property-title">قصر الأفق الملكي</div>
+                    <div class="property-location"><i class="fa fa-map-marker-alt" style="color: #d4af37;"></i> حي الياسمين، الرياض</div>
+                    <div class="property-price">14,500,000 ريال</div>
+                    <div class="property-features">
+                        <span><i class="fa fa-bed"></i> 8 غرف</span>
+                        <span><i class="fa fa-bath"></i> 10 حمامات</span>
+                        <span><i class="fa fa-ruler-combined"></i> 1400 م²</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features / Why Choose Us -->
+    <div class="features-section">
+        <div class="section-header" style="margin-bottom: 20px;">
+            <h2>لماذا تختار دار الخليج؟</h2>
+            <p>نحن نتميز بالاحترافية العالية وخدمة العملاء على مدار الساعة</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fa fa-shield-alt"></i>
+                <h3>مصداقية وأمان تام</h3>
+                <p>جميع عقاراتنا مرخصة وتخضع لتدقيق قانوني كامل يضمن حقوقك.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fa fa-handshake"></i>
+                <h3>استشارات استثمارية</h3>
+                <p>فريق متخصص لمساعدتك في اختيار العقار الأنسب لعوائد مالية مرتفعة.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fa fa-headset"></i>
+                <h3>دعم مستمر 24/7</h3>
+                <p>خدمة عملاء جاهزة للإجابة عن استفساراتك وتنظيم جولات المعاينة.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interior Contact Banner -->
+    <div class="container">
+        <div class="interior-contact">
+            <h2>هل تبحث عن عقار بمواصفات خاصة؟</h2>
+            <p>تواصل معنا فوراً وسيقوم أحد مستشارينا العقاريين بعرض الخيارات المناسبة لطلبك بدقة.</p>
+            <a href="#" class="btn-white">احصل على استشارة مجانية</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>عن دار الخليج</h3>
+                <p>شركة رائدة في مجال التطوير والوساطة العقارية الفاخرة، نربطك بأفضل الفرص الاستثمارية.</p>
+            </div>
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <a href="#">الرئيسية</a>
+                <a href="#">العقارات المتاحة</a>
+                <a href="#">خدماتنا</a>
+                <a href="#">اتصل بنا</a>
+            </div>
+            <div class="footer-col">
+                <h3>تواصل معنا</h3>
+                <p><i class="fa fa-map-marker-alt"></i> دبي، الإمارات العربية المتحدة</p>
+                <p><i class="fa fa-phone"></i> +971 4 000 0000</p>
+                <p><i class="fa fa-envelope"></i> info@dar-alkhaleej.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2026 - دار الخليج للعقارات الفاخرة</p>
+        </div>
+    </footer>
+
+</body>
+</html>
